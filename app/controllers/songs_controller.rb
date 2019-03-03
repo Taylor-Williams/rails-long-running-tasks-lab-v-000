@@ -32,6 +32,7 @@ class SongsController < ApplicationController
       s = Song.find_or_create_by(title: song[0])
       s.artist = Artist.find_or_create_by(name: song[1])
     end
+    redirect_to songs_upload_path
   end
 
   def update
