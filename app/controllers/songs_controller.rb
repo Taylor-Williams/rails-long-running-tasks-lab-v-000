@@ -23,16 +23,15 @@ class SongsController < ApplicationController
     end
   end
 
+  def edit
+    @song = Song.find(params[:id])
+  end
+
   def upload
     CSV.foreach(params[:songs].path, headers: true) do |song|
       s = Song.find_or_create_by(title: song[0])
       s.artist = Artist.find_or_create_by(name: song[1])
     end
-    redirect_to songs_path
-  end
-
-  def edit
-    @song = Song.find(params[:id])
   end
 
   def update
@@ -60,3 +59,4 @@ class SongsController < ApplicationController
     params.require(:song).permit(:title, :artist_name)
   end
 end
+
